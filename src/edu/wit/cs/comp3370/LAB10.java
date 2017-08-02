@@ -15,12 +15,71 @@ import java.util.Scanner;
 
 public class LAB10 {
 	
-	// TODO document this method
 	public static Vertex[][] FindAllPaths(Graph g) {
-		// TODO implement this method
-		return null;
+		int n = g.getVertices().length;
+		double[][] dist = new double[n][n];
+		Vertex[][] next = new Vertex[n][n];
+
+		for (int x = 0; x < n; x++) {
+			for (int y = 0; y < n; y++) {
+				dist[x][y] = Double.MAX_VALUE;
+			}
+		}
+		for (Vertex v : g.getVertices()) {
+			dist[v.ID][v.ID] = 0;
+			next[v.ID][v.ID] = null;
+		}
+
+		System.out.println(g.getEdges().length);
+		for (Edge e : g.getEdges()) {
+			dist[e.src.ID][e.dst.ID] = e.cost;
+			next[e.src.ID][e.dst.ID] = e.dst;
+		}
+		// ArrayList<Edge> edges = new ArrayList<Edge>();
+		// for (Vertex x : g.getVertices()) {
+		// for (Vertex y : g.getVertices()) {
+		// if (x == y)
+		// continue;
+		// dist[x.ID][y.ID] = dist(x, y);
+		// next[x.ID][y.ID] = y;
+		// }
+		// }
+
+		for (int k = 0; k < n; k++) {
+			for (int i = 0; i < n; i++) {
+				for (int j = 0; j < n; j++) {
+					if (dist[i][j] > dist[i][k] + dist[k][j]) {
+						dist[i][j] = dist[i][k] + dist[k][j];
+						next[i][j] = next[i][k];
+					}
+				}
+			}
+		}
+
+		return next;
 	}
-	
+
+	private static void printTable(Object[][] os) {
+		for (Object[] c : os) {
+			for (Object o : c) {
+				System.out.printf("%5s ", o);
+			}
+			System.out.println();
+		}
+	}
+
+	private static void printDoubleTable(double[][] ds) {
+		for (double[] c : ds) {
+			for (double d : c) {
+				System.out.printf("%5f ", d);
+			}
+			System.out.println();
+		}
+
+	}
+	private static double dist(Vertex s, Vertex d) {
+		return Math.sqrt(Math.pow(s.x - d.x, 2) + Math.pow(s.y - d.y, 2));
+	}
 	/********************************************
 	 * 
 	 * You shouldn't modify anything past here
