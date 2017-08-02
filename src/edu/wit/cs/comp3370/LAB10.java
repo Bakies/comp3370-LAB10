@@ -35,15 +35,6 @@ public class LAB10 {
 			dist[e.src.ID][e.dst.ID] = e.cost;
 			next[e.src.ID][e.dst.ID] = e.dst;
 		}
-		// ArrayList<Edge> edges = new ArrayList<Edge>();
-		// for (Vertex x : g.getVertices()) {
-		// for (Vertex y : g.getVertices()) {
-		// if (x == y)
-		// continue;
-		// dist[x.ID][y.ID] = dist(x, y);
-		// next[x.ID][y.ID] = y;
-		// }
-		// }
 
 		for (int k = 0; k < n; k++) {
 			for (int i = 0; i < n; i++) {
