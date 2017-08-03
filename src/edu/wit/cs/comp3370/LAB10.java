@@ -22,7 +22,7 @@ public class LAB10 {
 
 		for (int x = 0; x < n; x++) {
 			for (int y = 0; y < n; y++) {
-				dist[x][y] = Double.MAX_VALUE;
+				dist[x][y] = Double.POSITIVE_INFINITY;
 			}
 		}
 		for (Vertex v : g.getVertices()) {
@@ -30,7 +30,6 @@ public class LAB10 {
 			next[v.ID][v.ID] = null;
 		}
 
-		System.out.println(g.getEdges().length);
 		for (Edge e : g.getEdges()) {
 			dist[e.src.ID][e.dst.ID] = e.cost;
 			next[e.src.ID][e.dst.ID] = e.dst;
